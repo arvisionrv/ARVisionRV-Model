@@ -58,10 +58,6 @@
         Awning
     </button>
     
-    <button onclick="listAnimationsDelayed()" style="padding: 10px 20px; background-color: #f57f17; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
-        FIND ANIMATIONS (Delayed)
-    </button>
-    
     <p style="font-size: 0.9em; margin-top: 10px;">(Tap the View button to see if it fits your space)</p>
   </div>
   
@@ -71,7 +67,7 @@
       document.querySelector('model-viewer').activateAR();
     });
 
-    // FIX 1: Stop the model from auto-rotating after the first interaction
+    // FIX: Stop the model from auto-rotating after the first interaction
     document.querySelector('model-viewer').addEventListener('mousedown', function() {
         this.removeAttribute('auto-rotate');
     }, { once: true }); 
@@ -83,26 +79,12 @@
       modelViewer.scale = '1 1 1';
     }
     
-    // TEMPORARY FUNCTION TO LIST ALL ANIMATIONS WITH 2-SECOND DELAY
-    function listAnimationsDelayed() {
-        const modelViewer = document.querySelector('model-viewer');
-        
-        // Wait 2000 milliseconds (2 seconds) to ensure the model loads
-        setTimeout(() => {
-            if (modelViewer.availableAnimations.length > 0) {
-                const names = modelViewer.availableAnimations.map(anim => anim.name);
-                alert("Available Animations:\n" + names.join('\n'));
-            } else {
-                alert("Animations are still loading. Try clicking FIND ANIMATIONS again.");
-            }
-        }, 2000); 
-    }
+    // TEMPORARY FUNCTION REMOVED (listAnimationsDelayed)
 
-
-    // 3. Toggle the Awning Animation (Using placeholder name 'Awning')
+    // 3. Toggle the Awning Animation (Using the correct name 'SideAwningLower')
     function toggleAwning() {
       const modelViewer = document.querySelector('model-viewer');
-      const awningAnimation = 'Awning'; // This must be replaced with the correct name found via the button
+      const awningAnimation = 'SideAwningLower'; // FINAL CORRECTED ANIMATION NAME
       
       if (modelViewer.lastAppliedAnimation === awningAnimation) {
         modelViewer.animationCrossfadeDuration = 0.5;
@@ -110,7 +92,7 @@
             name: awningAnimation, 
             repetitions: 1, 
             time: 0,
-            direction: 'reverse' 
+            direction: 'reverse' // Closes the awning
         });
       } else {
         modelViewer.animationCrossfadeDuration = 0.5;
@@ -125,4 +107,5 @@
 
 </body>
 </html>
+
 
