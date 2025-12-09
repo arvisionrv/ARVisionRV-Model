@@ -79,12 +79,10 @@
       modelViewer.scale = '1 1 1';
     }
     
-    // TEMPORARY FUNCTION REMOVED (listAnimationsDelayed)
-
-    // 3. Toggle the Awning Animation (Using the correct name 'SideAwningLower')
+    // 3. Toggle the Awning Animation (Now set to 'SideAwningRaise')
     function toggleAwning() {
       const modelViewer = document.querySelector('model-viewer');
-      const awningAnimation = 'SideAwningRaise'; // FINAL CORRECTED ANIMATION NAME
+      const awningAnimation = 'SideAwningRaise'; // FINAL ATTEMPT: Using the 'Raise' animation name
       
       if (modelViewer.lastAppliedAnimation === awningAnimation) {
         modelViewer.animationCrossfadeDuration = 0.5;
@@ -92,13 +90,13 @@
             name: awningAnimation, 
             repetitions: 1, 
             time: 0,
-            direction: 'reverse' // Closes the awning
+            direction: 'reverse' // Reverses the animation (closes)
         });
       } else {
         modelViewer.animationCrossfadeDuration = 0.5;
         modelViewer.play({ 
             name: awningAnimation, 
-            repetitions: 1 
+            repetitions: 1 // Plays the animation (opens)
         });
       }
       modelViewer.lastAppliedAnimation = awningAnimation;
