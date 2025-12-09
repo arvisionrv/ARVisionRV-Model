@@ -8,7 +8,7 @@
       width: 100%;
       height: 600px;
     }
-    /* Styling for the new Dimensions Box (Fit Check) */
+    /* Styling for the Dimensions Box */
     #dimensions-box {
       border: 2px solid #004d40; /* Dark Teal Border */
       padding: 15px;
@@ -31,25 +31,34 @@
 <body>
 
   <model-viewer 
-src="https://dl.dropboxusercontent.com/scl/fi/4pg16eaau9epb6ni0ozms/GenesisRVAnim.glb?rlkey=ahdz4jzwot4nt5fyhpvw7yeae&st=86lq7492&dl=1" 
-ar 
-ar-modes="webxr scene-viewer quick-look" 
-camera-controls 
-touch-action="pan" 
-shadow-intensity="1" 
-auto-rotate 
-rotation-per-second="40deg"
-ar-placement="floor">  <-- ADD THIS -->
-</model-viewer>
-
+    src="https://dl.dropboxusercontent.com/scl/fi/4pg16eaau9epb6ni0ozms/GenesisRVAnim.glb?rlkey=ahdz4jzwot4nt5fyhpvw7yeae&st=86lq7492&dl=1" 
+    ar 
+    ar-modes="webxr scene-viewer quick-look" 
+    camera-controls 
+    touch-action="pan" 
+    shadow-intensity="1" 
+    auto-rotate 
+    rotation-per-second="40deg"
+    ar-placement="floor">
+  </model-viewer>
 
   <div id="dimensions-box">
-    <h3>RV Dimensions (Fit Check)</h3>
+    <h3>RV Dimensions (Key Specs)</h3>
     <span class="dim-label">Length: 31.5 feet</span>
     <span class="dim-label">Width: 8.0 feet</span>
     <span class="dim-label">Height: 12.0 feet</span>
-    <p style="font-size: 0.9em; margin-top: 15px;">Use the AR button to view life-size clearance.</p>
+    
+    <button id="ar-button" style="padding: 10px 20px; background-color: #004d40; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold;">
+        View REAL SIZE in my Driveway
+    </button>
+    <p style="font-size: 0.9em; margin-top: 10px;">(Tap to see if it fits your space)</p>
   </div>
+  
+  <script>
+    document.getElementById('ar-button').addEventListener('click', () => {
+      document.querySelector('model-viewer').activateAR();
+    });
+  </script>
 
 </body>
 </html>
