@@ -51,14 +51,56 @@
     <button id="ar-button" style="padding: 10px 20px; background-color: #004d40; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold;">
         View REAL SIZE in my Driveway
     </button>
-    <p style="font-size: 0.9em; margin-top: 10px;">(Tap to see if it fits your space)</p>
+    <button onclick="resetView()" style="padding: 10px 20px; background-color: #4a148c; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
+        Reset View
+    </button>
+    <button onclick="toggleAwning()" style="padding: 10px 20px; background-color: #00897b; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
+        Toggle Awning
+    </button>
+    
+    <p style="font-size: 0.9em; margin-top: 10px;">(Tap the View button to see if it fits your space)</p>
   </div>
   
   <script>
+    // 1. Activate AR when the custom button is clicked
     document.getElementById('ar-button').addEventListener('click', () => {
       document.querySelector('model-viewer').activateAR();
     });
+
+    // 2. Reset the camera view and scale
+    function resetView() {
+      const modelViewer = document.querySelector('model-viewer');
+      modelViewer.cameraOrbit = '0deg 75deg auto'; 
+      modelViewer.scale = '1 1 1';
+    }
+
+    // 3. Toggle the Awning Animation
+    function toggleAwning() {
+      const modelViewer = document.querySelector('model-viewer');
+      const awningAnimation = 'AwningOpen'; 
+      
+      // Check if the model is currently playing the animation
+      if (modelViewer.lastAppliedAnimation === awningAnimation) {
+        // If it's open, pause it and reverse the playback direction to close it
+        modelViewer.animationCrossfadeDuration = 0.5;
+        modelViewer.play({ 
+            name: awningAnimation, 
+            repetitions: 1, 
+            time: 0,
+            direction: 'reverse' 
+        });
+      } else {
+        // If it's closed, play it forward to open it
+        modelViewer.animationCrossfadeDuration = 0.5;
+        modelViewer.play({ 
+            name: awningAnimation, 
+            repetitions: 1 
+        });
+      }
+      modelViewer.lastAppliedAnimation = awningAnimation;
+    }
   </script>
 
 </body>
 </html>
+
