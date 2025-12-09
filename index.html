@@ -55,7 +55,12 @@
         Reset View
     </button>
     <button onclick="toggleAwning()" style="padding: 10px 20px; background-color: #00897b; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
-        Awning </button>
+        Awning
+    </button>
+    
+    <button onclick="listAnimations()" style="padding: 10px 20px; background-color: #f57f17; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
+        FIND ANIMATIONS
+    </button>
     
     <p style="font-size: 0.9em; margin-top: 10px;">(Tap the View button to see if it fits your space)</p>
   </div>
@@ -77,11 +82,24 @@
       modelViewer.cameraOrbit = '0deg 75deg auto'; 
       modelViewer.scale = '1 1 1';
     }
+    
+    // TEMPORARY FUNCTION TO LIST ALL ANIMATIONS
+    function listAnimations() {
+        const modelViewer = document.querySelector('model-viewer');
+        // Wait for the model to load before trying to get animations
+        if (modelViewer.availableAnimations.length > 0) {
+            const names = modelViewer.availableAnimations.map(anim => anim.name);
+            alert("Available Animations:\n" + names.join('\n'));
+        } else {
+            alert("Model is still loading or contains no animations.");
+        }
+    }
 
-    // 3. Toggle the Awning Animation (Fixed name and functionality)
+
+    // 3. Toggle the Awning Animation (Using placeholder name 'Awning')
     function toggleAwning() {
       const modelViewer = document.querySelector('model-viewer');
-      const awningAnimation = 'Awning'; // Corrected animation name
+      const awningAnimation = 'Awning'; // This must be replaced with the correct name found via the button
       
       if (modelViewer.lastAppliedAnimation === awningAnimation) {
         modelViewer.animationCrossfadeDuration = 0.5;
