@@ -54,9 +54,8 @@
     <button onclick="resetView()" style="padding: 10px 20px; background-color: #4a148c; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
         Reset View
     </button>
-    <button onclick="toggleAwning()" style="padding: 10px 20px; background-color: #00897b; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
-        Awning
-    </button>
+    <button onclick="toggleDoor()" style="padding: 10px 20px; background-color: #00897b; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
+        Rear Deck/Door </button>
     
     <p style="font-size: 0.9em; margin-top: 10px;">(Tap the View button to see if it fits your space)</p>
   </div>
@@ -79,27 +78,27 @@
       modelViewer.scale = '1 1 1';
     }
     
-    // 3. Toggle the Awning Animation (Now set to 'SideAwningRaise')
-    function toggleAwning() {
+    // 3. Toggle the Door Animation (Changed function name and using OpenDoor1)
+    function toggleDoor() {
       const modelViewer = document.querySelector('model-viewer');
-      const awningAnimation = 'SideAwningRaise'; // FINAL ATTEMPT: Using the 'Raise' animation name
+      const doorAnimation = 'OpenDoor1'; // Using the name from the video screenshot
       
-      if (modelViewer.lastAppliedAnimation === awningAnimation) {
+      if (modelViewer.lastAppliedAnimation === doorAnimation) {
         modelViewer.animationCrossfadeDuration = 0.5;
         modelViewer.play({ 
-            name: awningAnimation, 
+            name: doorAnimation, 
             repetitions: 1, 
             time: 0,
-            direction: 'reverse' // Reverses the animation (closes)
+            direction: 'reverse' // Closes the door
         });
       } else {
         modelViewer.animationCrossfadeDuration = 0.5;
         modelViewer.play({ 
-            name: awningAnimation, 
-            repetitions: 1 // Plays the animation (opens)
+            name: doorAnimation, 
+            repetitions: 1 // Opens the door
         });
       }
-      modelViewer.lastAppliedAnimation = awningAnimation;
+      modelViewer.lastAppliedAnimation = doorAnimation;
     }
   </script>
 
