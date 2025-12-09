@@ -55,8 +55,7 @@
         Reset View
     </button>
     <button onclick="toggleAwning()" style="padding: 10px 20px; background-color: #00897b; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
-        Toggle Awning
-    </button>
+        Awning </button>
     
     <p style="font-size: 0.9em; margin-top: 10px;">(Tap the View button to see if it fits your space)</p>
   </div>
@@ -67,6 +66,11 @@
       document.querySelector('model-viewer').activateAR();
     });
 
+    // FIX 1: Stop the model from auto-rotating after the first interaction
+    document.querySelector('model-viewer').addEventListener('mousedown', function() {
+        this.removeAttribute('auto-rotate');
+    }, { once: true }); 
+
     // 2. Reset the camera view and scale
     function resetView() {
       const modelViewer = document.querySelector('model-viewer');
@@ -74,14 +78,12 @@
       modelViewer.scale = '1 1 1';
     }
 
-    // 3. Toggle the Awning Animation
+    // 3. Toggle the Awning Animation (Fixed name and functionality)
     function toggleAwning() {
       const modelViewer = document.querySelector('model-viewer');
-      const awningAnimation = 'AwningOpen'; 
+      const awningAnimation = 'Awning'; // Corrected animation name
       
-      // Check if the model is currently playing the animation
       if (modelViewer.lastAppliedAnimation === awningAnimation) {
-        // If it's open, pause it and reverse the playback direction to close it
         modelViewer.animationCrossfadeDuration = 0.5;
         modelViewer.play({ 
             name: awningAnimation, 
@@ -90,7 +92,6 @@
             direction: 'reverse' 
         });
       } else {
-        // If it's closed, play it forward to open it
         modelViewer.animationCrossfadeDuration = 0.5;
         modelViewer.play({ 
             name: awningAnimation, 
