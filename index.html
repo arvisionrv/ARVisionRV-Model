@@ -58,8 +58,8 @@
         Awning
     </button>
     
-    <button onclick="listAnimations()" style="padding: 10px 20px; background-color: #f57f17; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
-        FIND ANIMATIONS
+    <button onclick="listAnimationsDelayed()" style="padding: 10px 20px; background-color: #f57f17; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-weight: bold; margin-left: 10px;">
+        FIND ANIMATIONS (Delayed)
     </button>
     
     <p style="font-size: 0.9em; margin-top: 10px;">(Tap the View button to see if it fits your space)</p>
@@ -83,16 +83,19 @@
       modelViewer.scale = '1 1 1';
     }
     
-    // TEMPORARY FUNCTION TO LIST ALL ANIMATIONS
-    function listAnimations() {
+    // TEMPORARY FUNCTION TO LIST ALL ANIMATIONS WITH 2-SECOND DELAY
+    function listAnimationsDelayed() {
         const modelViewer = document.querySelector('model-viewer');
-        // Wait for the model to load before trying to get animations
-        if (modelViewer.availableAnimations.length > 0) {
-            const names = modelViewer.availableAnimations.map(anim => anim.name);
-            alert("Available Animations:\n" + names.join('\n'));
-        } else {
-            alert("Model is still loading or contains no animations.");
-        }
+        
+        // Wait 2000 milliseconds (2 seconds) to ensure the model loads
+        setTimeout(() => {
+            if (modelViewer.availableAnimations.length > 0) {
+                const names = modelViewer.availableAnimations.map(anim => anim.name);
+                alert("Available Animations:\n" + names.join('\n'));
+            } else {
+                alert("Animations are still loading. Try clicking FIND ANIMATIONS again.");
+            }
+        }, 2000); 
     }
 
 
